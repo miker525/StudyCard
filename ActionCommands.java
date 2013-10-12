@@ -69,5 +69,19 @@ public class ActionCommands implements ActionListener
 			}
 		}
 		
+		if (ae.getActionCommand().equals("flip"))
+		{
+			String s = form.cfrontlbl.getText();
+			if (form.icard.getFrontText() == s)
+			{
+				form.setIndexCardText(form.icard.getBackText());
+				System.out.println(form.icard.getBackText());
+			}
+			else if(form.icard.getBackText() == s)
+			{
+				form.setIndexCardText(form.icard.getFrontText());
+				System.out.println(form.icard.getFrontText());
+			}
+		}
 	}
 }

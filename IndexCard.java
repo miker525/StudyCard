@@ -90,4 +90,7 @@ public class IndexCard extends java.lang.Object implements Serializable
 			return false;
 		}
 	}
+	
+
+	
 }

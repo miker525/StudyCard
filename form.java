@@ -40,7 +40,9 @@ public class form extends JFrame {
 	static DefaultListModel<String> dlm = new DefaultListModel<String>();
 	static JList<String> list;
 	private JScrollPane jsp;
+	static IndexCard icard;
 	static IndexCardHolder ich = new IndexCardHolder();
+	static JLabel cfrontlbl;
 	/**
 	 * Launch the application.
 	 */
@@ -71,6 +73,19 @@ public class form extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	
+		//Index Card Creation
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(129, 11, 305, 198);
+		contentPane.add(panel);
+		panel.setLayout(null);
+				
+		/*final JLabel */cfrontlbl = new JLabel("CardFront");
+		cfrontlbl.setHorizontalAlignment(SwingConstants.CENTER);
+		cfrontlbl.setBounds(0, 92, 305, 14);
+		panel.add(cfrontlbl);
+		//End Card Creation
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 0, 119, 226);
@@ -78,28 +93,20 @@ public class form extends JFrame {
 		
 		list = new JList<String>(dlm);
 		scrollPane.setViewportView(list);
-		/*list.addMouseListener(new java.awt.event.MouseAdapter(){
-            public void mouseClicked(java.awt.event.MouseEvent mouseEvent){
-                if (!list.getCellBounds(list.getSelectedIndex(), list.getSelectedIndex()).contains(mouseEvent.getPoint())){
-                    list.removeSelectionInterval(list.getSelectedIndex(), list.getSelectedIndex());
-                }
-                int x = list.getSelectedIndex();
-                java.lang.System.out.println(list.getSelectedIndex());
-                /*if (x != -1)
-                {
-                	IndexCard ic = new IndexCard();
-                	ic = ich.getCardByString(list.getSelectedValue());
-                	if (ic.isFrontOfCard())
-                	{
-                		cfrontlbl.setText(ic.getFrontText());
-                	}
-                	else
-                	{
-                		cfrontlbl.setText(ic.getBackText());
-                	}
-                }*/
-        //    }
-      //  });
+		list.addMouseListener(new java.awt.event.MouseAdapter()
+		{
+            public void mouseClicked(java.awt.event.MouseEvent mouseEvent)
+            {
+            	int x = list.getSelectedIndex();
+            	//System.out.println(list.getSelectedValue());
+            	IndexCard xc = new IndexCard();
+            	IndexCardHolder iche = new IndexCardHolder();
+            	xc = ich.getCardByString(list.getSelectedValue());
+            	icard = xc;
+            	cfrontlbl.setText(xc.getFrontText());
+            		
+            }
+         });
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -128,17 +135,21 @@ public class form extends JFrame {
 		button_1.addActionListener(new ActionCommands());
 		contentPane.add(button_1);
 		
-		//Index Card Creation
-				JPanel panel = new JPanel();
-				panel.setBackground(Color.WHITE);
-				panel.setBounds(129, 11, 305, 198);
-				contentPane.add(panel);
-				panel.setLayout(null);
-						
-				final JLabel cfrontlbl = new JLabel("CardFront");
-				cfrontlbl.setHorizontalAlignment(SwingConstants.CENTER);
-				cfrontlbl.setBounds(0, 92, 305, 14);
-				panel.add(cfrontlbl);
-				//End Card Creation
+		JButton btnFlipIndexCard = new JButton("Flip");
+		btnFlipIndexCard.setBounds(372, 213, 62, 23);
+		btnFlipIndexCard.setActionCommand("flip");
+		btnFlipIndexCard.addActionListener(new ActionCommands());
+		contentPane.add(btnFlipIndexCard);
+		
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.setBounds(305, 213, 62, 23);
+		contentPane.add(btnEdit);
+		
+		
+	}
+	
+	public static void setIndexCardText(String text)
+	{
+		cfrontlbl.setText(text);
 	}
 }
