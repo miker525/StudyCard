@@ -97,14 +97,10 @@ public class form extends JFrame {
 		{
             public void mouseClicked(java.awt.event.MouseEvent mouseEvent)
             {
-            	int x = list.getSelectedIndex();
-            	//System.out.println(list.getSelectedValue());
             	IndexCard xc = new IndexCard();
-            	IndexCardHolder iche = new IndexCardHolder();
             	xc = ich.getCardByString(list.getSelectedValue());
             	icard = xc;
             	cfrontlbl.setText(xc.getFrontText());
-            		
             }
          });
 		
@@ -143,6 +139,8 @@ public class form extends JFrame {
 		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.setBounds(305, 213, 62, 23);
+		btnEdit.setActionCommand("edit");
+		btnEdit.addActionListener(new ActionCommands());
 		contentPane.add(btnEdit);
 		
 		

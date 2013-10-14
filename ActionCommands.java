@@ -19,6 +19,7 @@
  */
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -48,6 +49,8 @@ public class ActionCommands implements ActionListener
 		if (ae.getActionCommand().equals("save"))
 		{
 			JFileChooser jfc = new JFileChooser();
+			jfc.removeChoosableFileFilter(jfc.getFileFilter());
+			jfc.addChoosableFileFilter(new FileNameExtensionFilter("StudyCards", "scard"));
 			int res = jfc.showSaveDialog(form.list);
 			if (res == JFileChooser.APPROVE_OPTION) 
 			{
@@ -58,6 +61,8 @@ public class ActionCommands implements ActionListener
 		{
 			form.dlm.clear();
 			JFileChooser jfc = new JFileChooser();
+			jfc.removeChoosableFileFilter(jfc.getFileFilter());
+			jfc.addChoosableFileFilter(new FileNameExtensionFilter("StudyCards", "scard"));
 			int res = jfc.showOpenDialog(form.list);
 			if (res == JFileChooser.APPROVE_OPTION) 
 			{
@@ -82,6 +87,36 @@ public class ActionCommands implements ActionListener
 				form.setIndexCardText(form.icard.getFrontText());
 				System.out.println(form.icard.getFrontText());
 			}
+		}
+		
+		if (ae.getActionCommand().equals("edit"))
+		{
+			if (form.cfrontlbl.getText() == form.icard.getFrontText())
+			{
+				System.out.println("Editing Front of Card");
+				IndexCard ic = new IndexCard();
+				ic = form.ich.getCardByString(form.list.getSelectedValue());
+				form.ich.editCard(ic, true, JOptionPane.showInputDialog("Enter The Front Text"));
+				refreshList();
+			}
+			else if (form.cfrontlbl.getText() == form.icard.getBackText())
+			{
+				System.out.println("Editing Back Of Card");
+				IndexCard ic = new IndexCard();
+				ic = form.ich.getCardByString(form.list.getSelectedValue());
+				form.ich.editCard(ic, false, JOptionPane.showInputDialog("Enter The Back Text"));
+				refreshList();
+			}
+		}
+		
+	}
+	
+	public void refreshList()
+	{
+		form.dlm.clear();
+		for (IndexCard i: form.ich.viewList())
+		{
+			form.dlm.addElement(i.getFrontText());
 		}
 	}
 }

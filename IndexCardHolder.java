@@ -47,6 +47,18 @@ public class IndexCardHolder
 		count--; //Removing user defined card and subtracting to the count
 	}
 	
+	public void editCard(IndexCard ic, boolean isfront, String newText)
+	{
+		if (isfront)
+		{
+			ic.setFront(newText);
+		}
+		else if (!isfront)
+		{
+			ic.setBack(newText);
+		}	
+	}
+	
 	public List<IndexCard> viewList()
 	{
 		return l; //Returns list of cards
