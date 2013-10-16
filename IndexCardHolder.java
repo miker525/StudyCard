@@ -120,6 +120,12 @@ public class IndexCardHolder
 		return l.size();
 	} //Returns the amount of cards in the holder
 	
+	public IndexCard getCardAt(int location)
+	{
+		IndexCard ic = (IndexCard)this.l.get(location);
+		return ic;
+	}
+	
 	public void SaveCards(String filename)
 	{
 		try {

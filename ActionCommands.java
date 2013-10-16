@@ -109,6 +109,29 @@ public class ActionCommands implements ActionListener
 			}
 		}
 		
+		if(ae.getActionCommand().equals("quiz"))
+		{
+			QuizForm qf = new QuizForm();
+			qf.setVisible(true);
+		}
+		
+		if (ae.getActionCommand().equals("check"))
+		{
+			String o = QuizForm.textField.getText().toLowerCase().toString();
+			String t = QuizForm.icard.getBackText().toLowerCase().toString();
+			if (o.equals(t))
+			{
+				JOptionPane.showMessageDialog(null, "Your Answer Was Correct!!!", "Correct!", JOptionPane.INFORMATION_MESSAGE);
+				QuizForm.nextCard();
+				QuizForm.correct++;
+			}
+			else 
+			{
+				JOptionPane.showMessageDialog(null, "You were wrong. The correct answer was: \n"+ QuizForm.icard.getBackText(), "Incorrect!", JOptionPane.INFORMATION_MESSAGE);
+				QuizForm.nextCard();
+			}
+		}
+		
 	}
 	
 	public void refreshList()

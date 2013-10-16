@@ -43,6 +43,7 @@ public class form extends JFrame {
 	static IndexCard icard;
 	static IndexCardHolder ich = new IndexCardHolder();
 	static JLabel cfrontlbl;
+	public static boolean isQuizzing;
 	/**
 	 * Launch the application.
 	 */
@@ -143,7 +144,12 @@ public class form extends JFrame {
 		btnEdit.addActionListener(new ActionCommands());
 		contentPane.add(btnEdit);
 		
-		
+		JButton btnQuiz = new JButton("Quiz!");
+		btnQuiz.setBounds(239, 213, 62, 23);
+		btnQuiz.setActionCommand("quiz");
+		btnQuiz.addActionListener(new ActionCommands());
+		contentPane.add(btnQuiz);
+		isQuizzing = false;
 	}
 	
 	public static void setIndexCardText(String text)
